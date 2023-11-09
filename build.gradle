@@ -19,6 +19,8 @@ loom {
 	// 		programArgs "--userProperties", "{}"
 	// 	}
 	// }
+
+	accessWidenerPath.set(file("src/main/resources/bismuth.accesswidener"))
 }
 
 dependencies {

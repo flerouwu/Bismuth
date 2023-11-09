@@ -1,14 +1,26 @@
 package dev.flero.bismuth;
 
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.loader.api.FabricLoader;
+import net.fabricmc.loader.api.ModContainer;
+import net.fabricmc.loader.api.metadata.ModMetadata;
+import net.fabricmc.loader.api.metadata.Person;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class BismuthMod implements ClientModInitializer {
+	public static @Nullable String version = null;
+	public static List<String> contributors = new ArrayList<>();
+
 	@Override
 	public void onInitializeClient() {
-		// This code runs as soon as Minecraft is in a mod-load-ready state.
-		// However, some things (like resources) may still be uninitialized.
-		// Proceed with mild caution.
+		ModContainer container = FabricLoader.getInstance().getModContainer("bismuth").get();
 
-		System.out.println("Hello Fabric world!");
+		ModMetadata metadata = container.getMetadata();
+		version = metadata.getVersion().getFriendlyString();
+		contributors = metadata.getContributors().stream().map(Person::getName).collect(Collectors.toList());
 	}
 }

@@ -4,7 +4,7 @@
   "version": "${version}",
   "name": "Bismuth",
   "description": "Minecraft client. idfk",
-  "authors": [
+  "contributors": [
     "flerouwu"
   ],
   "contact": {
@@ -14,6 +14,7 @@
   "license": "CC0-1.0",
   "icon": "assets/bismuth/icon.png",
   "environment": "*",
+  "accessWidener": "bismuth.accesswidener",
   "entrypoints": {
     "client": [
       "dev.flero.bismuth.BismuthMod"
