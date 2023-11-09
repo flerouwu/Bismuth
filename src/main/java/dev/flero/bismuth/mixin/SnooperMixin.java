@@ -21,7 +21,6 @@ public class SnooperMixin {
 
     @Inject(method = "setActive", at = @At(value = "HEAD"), cancellable = true)
     public void setActive(CallbackInfo ci) {
-        System.out.println("Snooper#setActive(boolean bl) was called! Returning the method early...");
         active = false;
         timer.cancel();
         ci.cancel();
