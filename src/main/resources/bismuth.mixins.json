@@ -3,10 +3,9 @@
   "minVersion": "0.8",
   "package": "dev.flero.bismuth.mixin",
   "compatibilityLevel": "JAVA_8",
-  "mixins": [
-  ],
+  "mixins": [],
   "client": [
-    "dev.flero.bismuth.mixin.ExampleMixin"
+    "ExampleMixin"
   ],
   "injectors": {
     "defaultRequire": 1
