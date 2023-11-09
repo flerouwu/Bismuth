@@ -20,6 +20,6 @@ public class TitleScreenMixin {
         }
 
         list.add(button);
-        return false;
+        return true;
     }
 }
