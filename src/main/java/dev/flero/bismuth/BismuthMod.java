@@ -2,8 +2,8 @@ package dev.flero.bismuth;
 
 import dev.flero.bismuth.config.ConfigManager;
 import dev.flero.bismuth.modules.GameTitle;
-import dev.flero.bismuth.modules.RealmsButton;
 import dev.flero.bismuth.modules.StartupLogo;
+import dev.flero.bismuth.modules.TitleCleaner;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
@@ -22,7 +22,7 @@ public class BismuthMod implements ClientModInitializer {
 
         logger.info("Loading config...");
         ConfigManager.loadConfig(GameTitle.class);
-        ConfigManager.loadConfig(RealmsButton.class);
+        ConfigManager.loadConfig(TitleCleaner.class);
         ConfigManager.loadConfig(StartupLogo.class);
     }
 }

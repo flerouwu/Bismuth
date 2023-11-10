@@ -1,7 +1,7 @@
 package dev.flero.bismuth.mixin;
 
 import dev.flero.bismuth.BismuthMod;
-import dev.flero.bismuth.modules.RealmsButton;
+import dev.flero.bismuth.modules.TitleCleaner;
 import net.fabricmc.loader.api.metadata.ModMetadata;
 import net.fabricmc.loader.api.metadata.Person;
 import net.minecraft.client.gui.screen.TitleScreen;
@@ -21,13 +21,29 @@ public class TitleScreenMixin {
     @Redirect(method = "initWidgetsNormal", at = @At(value = "INVOKE", target = "java/util/List.add(Ljava/lang/Object;)Z"))
     private boolean initWidgetsNormal(List<ButtonWidget> list, Object obj) {
         ButtonWidget button = (ButtonWidget) obj;
-        if (button.id == 14 && RealmsButton.isEnabled) {
-            // Skip the realms button.
-            return false;
+        if (TitleCleaner.isEnabled) {
+            if (button.id == 14 && TitleCleaner.removeRealms) return false;
         }
 
         list.add(button);
         return true;
+    }
+
+    @Redirect(method = "init", at = @At(value = "INVOKE", target = "java/util/List.add(Ljava/lang/Object;)Z"))
+    public boolean init(List<ButtonWidget> list, Object obj) {
+        ButtonWidget button = (ButtonWidget) obj;
+        if (TitleCleaner.isEnabled) {
+            if (button.id == 5 && TitleCleaner.removeLanguage) return false;
+        }
+
+        list.add(button);
+        return true;
+    }
+
+    @Redirect(method = "render", at = @At(value = "INVOKE", target = "net/minecraft/client/gui/screen/TitleScreen.drawCenteredString(Lnet/minecraft/client/font/TextRenderer;Ljava/lang/String;III)V"))
+    public void drawCenteredString(TitleScreen screen, net.minecraft.client.font.TextRenderer textRenderer, String text, int x, int y, int color) {
+        if (TitleCleaner.isEnabled && TitleCleaner.removeSplash) return;
+        screen.drawCenteredString(textRenderer, text, x, y, color);
     }
 
     @Inject(method = "render", at = @At(value = "TAIL"))
