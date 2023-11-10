@@ -34,6 +34,9 @@ dependencies {
 
 	// You can retrieve a specific api module using this notation.
 	// modImplementation(legacy.apiModule("legacy-fabric-item-groups-v1", project.fabric_version))
+
+	implementation("org.apache.logging.log4j:log4j-core:2.14.1")
+	implementation("com.moandjiezana.toml:toml4j:0.7.2")
 }
 
 processResources {
