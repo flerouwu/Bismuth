@@ -9,6 +9,7 @@ public class BismuthMod implements ClientModInitializer {
     public static @Nullable ModContainer container;
 
     @Override
+    @SuppressWarnings("OptionalGetWithoutIsPresent")
     public void onInitializeClient() {
         container = FabricLoader.getInstance().getModContainer("bismuth").get();
     }

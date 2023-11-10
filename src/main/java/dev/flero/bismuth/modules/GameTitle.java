@@ -10,7 +10,7 @@ public class GameTitle {
     public static boolean isEnabled = true;
 
     public static String getTitle(String original) {
-        if (isEnabled) {
+        if (isEnabled && BismuthMod.container != null) {
             return String.format("Bismuth %s - %s", BismuthMod.container.getMetadata().getVersion().getFriendlyString(), original);
         } else {
             return original;
