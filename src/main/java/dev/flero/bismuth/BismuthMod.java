@@ -1,6 +1,7 @@
 package dev.flero.bismuth;
 
 import dev.flero.bismuth.config.ConfigManager;
+import dev.flero.bismuth.modules.AccountSwitcher;
 import dev.flero.bismuth.modules.GameTitle;
 import dev.flero.bismuth.modules.StartupLogo;
 import dev.flero.bismuth.modules.TitleCleaner;
@@ -24,5 +25,6 @@ public class BismuthMod implements ClientModInitializer {
         ConfigManager.loadConfig(GameTitle.class);
         ConfigManager.loadConfig(TitleCleaner.class);
         ConfigManager.loadConfig(StartupLogo.class);
+        ConfigManager.loadConfig(AccountSwitcher.class);
     }
 }

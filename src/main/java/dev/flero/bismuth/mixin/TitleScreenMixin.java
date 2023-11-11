@@ -1,12 +1,15 @@
 package dev.flero.bismuth.mixin;
 
 import dev.flero.bismuth.BismuthMod;
+import dev.flero.bismuth.modules.AccountSwitcher;
 import dev.flero.bismuth.modules.TitleCleaner;
+import dev.flero.bismuth.ui.AccountSwitcherWidget;
 import net.fabricmc.loader.api.metadata.ModMetadata;
 import net.fabricmc.loader.api.metadata.Person;
 import net.minecraft.client.gui.screen.TitleScreen;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
@@ -17,6 +20,9 @@ import java.util.stream.Collectors;
 
 @Mixin(TitleScreen.class)
 public class TitleScreenMixin {
+    @Unique
+    private static final AccountSwitcherWidget accountSwitcher = new AccountSwitcherWidget();
+
     @SuppressWarnings("SameReturnValue")
     @Redirect(method = "initWidgetsNormal", at = @At(value = "INVOKE", target = "java/util/List.add(Ljava/lang/Object;)Z"))
     private boolean initWidgetsNormal(List<ButtonWidget> list, Object obj) {
@@ -63,5 +69,16 @@ public class TitleScreenMixin {
 
         contributors.delete(contributors.length() - 2, contributors.length());
         screen.drawWithShadow(screen.textRenderer, contributors.toString(), 2, 12, 0xFFFFFF);
+
+        // Draw Player Widget
+        if (AccountSwitcher.isEnabled) {
+            int height = screen.height / 4 + 48;
+            int width = screen.width / 2 - 64;
+            width -= 36;
+            width -= 64; // Width of the player widget
+            width -= 5; // Padding
+
+            accountSwitcher.render(mouseX, mouseY, width, height, 64, 105);
+        }
     }
 }

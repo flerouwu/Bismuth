@@ -6,6 +6,7 @@
   "mixins": [],
   "client": [
     "DirectConnectScreenMixin",
+    "LivingEntityRendererMixin",
     "MinecraftClientMixin",
     "SnooperMixin",
     "TitleScreenMixin"
