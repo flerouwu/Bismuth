@@ -15,8 +15,11 @@ import java.util.UUID;
 public class PaperDollWidget extends DrawableHelper implements Widget {
     private static final MinecraftClient client = MinecraftClient.getInstance();
     private GameProfile profile;
+    private final boolean followMouse;
 
-    public PaperDollWidget() {
+    public PaperDollWidget(boolean followMouse) {
+        this.followMouse = followMouse;
+
         profile = client.getSession().getProfile();
         if (profile.getId() == null) {
             profile = new GameProfile(UUID.randomUUID(), client.getSession().getUsername());
@@ -46,13 +49,21 @@ public class PaperDollWidget extends DrawableHelper implements Widget {
         GlStateManager.rotate(180.0f, 2.0f, 0.0f, 0.0f);
         DiffuseLighting.enableNormally();
         EntityRenderDispatcher dispatcher = client.getEntityRenderManager();
-        dispatcher.setYaw(0);
-        dispatcher.pitch = 0;
-        dispatcher.setRenderShadows(false);
+        GlStateManager.rotate(0.0f, 0.0F, 1.0F, 0.0F);
+        GlStateManager.rotate((float) Math.atan((mouseY - y - (double) height / 3) / 40.0F) * 10.0F, 1.0F, 0.0F, 0.0F);
 
         // Render dummy
-        dispatcher.method_6913(getDummy(), 0.0d, 0.0d, 0.0d, 0.0f, 0.0f, true);
+        LivingEntity entity = getDummy();
+        if (followMouse) {
+            entity.bodyYaw = -((float) Math.atan((mouseX - x - (double) width / 2)) / 20.0f) * 120.0F;
+            entity.yaw = -((float) Math.atan((mouseX - x - (double) width / 2) / 40.0f) * 40.0F);
+            entity.pitch = (float) Math.atan((mouseY - y - (double) height / 3) / 40.0f) * 20.0F;
+            entity.headYaw = entity.yaw;
+            entity.prevHeadYaw = entity.yaw;
+        }
 
+        dispatcher.setRenderShadows(false);
+        dispatcher.method_6913(entity, 0.0d, 0.0d, 0.0d, 0.0f, 1.0f, false);
         dispatcher.setRenderShadows(true);
         GlStateManager.popMatrix();
 
