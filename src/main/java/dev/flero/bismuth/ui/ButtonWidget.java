@@ -3,7 +3,7 @@ package dev.flero.bismuth.ui;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawableHelper;
 
-public class ButtonWidget extends DrawableHelper {
+public class ButtonWidget extends DrawableHelper implements Widget {
     private static final MinecraftClient client = MinecraftClient.getInstance();
     private final String text;
     private final Runnable onClick;
@@ -13,8 +13,8 @@ public class ButtonWidget extends DrawableHelper {
         this.onClick = onClick;
     }
 
+    @Override
     public void render(int mouseX, int mouseY, int x, int y, int width, int height) {
-        fill(x, y, x + width, y + height, 0x80000000);
         drawCenteredString(client.textRenderer, text, x + width / 2, y + (height - 8) / 2, 0xFFFFFFFF);
 
         if (isMouseOver(mouseX, mouseY, x, y, width, height)) {
@@ -23,6 +23,11 @@ public class ButtonWidget extends DrawableHelper {
             drawHorizontalLine(x, x + width - 1, y, 0xFFFFFFFF);
             drawHorizontalLine(x, x + width - 1, y + height - 1, 0xFFFFFFFF);
         }
+    }
+
+    @Override
+    public Size getMinimumSize() {
+        return new Size(-1, 15);
     }
 
     /**
