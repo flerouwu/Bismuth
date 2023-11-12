@@ -9,26 +9,33 @@ import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.render.DiffuseLighting;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.entity.LivingEntity;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.UUID;
 
 public class PaperDollWidget extends DrawableHelper implements Widget {
+    private static final Logger logger = LogManager.getLogger("Bismuth/PaperDollWidget");
     private static final MinecraftClient client = MinecraftClient.getInstance();
     private GameProfile profile;
+    private BismuthOtherClientPlayerEntity dummy;
     private final boolean followMouse;
 
     public PaperDollWidget(boolean followMouse) {
         this.followMouse = followMouse;
 
         profile = client.getSession().getProfile();
-        if (profile.getId() == null) {
-            profile = new GameProfile(UUID.randomUUID(), client.getSession().getUsername());
+        if (profile == null) {
+            logger.info("No profile found, creating dummy profile and requesting secure profile information.");
+            profile = new GameProfile(UUID.fromString(client.getSession().getUuid()), client.getSession().getUsername());
+            MinecraftClient.getInstance().getSessionService().fillProfileProperties(profile, true);
         }
     }
 
     public LivingEntity getDummy() {
         if (client.player != null) return client.player;
-        return new BismuthOtherClientPlayerEntity(profile);
+        if (dummy == null) dummy = new BismuthOtherClientPlayerEntity(profile);
+        return dummy;
     }
 
     @Override
