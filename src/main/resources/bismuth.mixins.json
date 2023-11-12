@@ -3,11 +3,12 @@
   "minVersion": "0.8",
   "package": "dev.flero.bismuth.mixin",
   "compatibilityLevel": "JAVA_8",
-  "mixins": [],
   "client": [
     "DirectConnectScreenMixin",
+    "GameOptionsMixin",
     "LivingEntityRendererMixin",
     "MinecraftClientMixin",
+    "ScreenshotUtilsMixin",
     "SnooperMixin",
     "TitleScreenMixin"
   ],
