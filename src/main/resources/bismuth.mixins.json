@@ -7,6 +7,7 @@
     "DirectConnectScreenMixin",
     "GameOptionsMixin",
     "GameRendererMixin",
+    "HandledScreenMixin",
     "InGameHudMixin",
     "LivingEntityRendererMixin",
     "MinecraftClientMixin",

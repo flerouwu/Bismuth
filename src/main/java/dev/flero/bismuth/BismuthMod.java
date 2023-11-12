@@ -31,6 +31,7 @@ public class BismuthMod implements ClientModInitializer {
         config.add(ScreenshotManager.class);
         config.add(Rendering.class);
         config.add(Zoom.class);
+        config.add(ScrollableTooltips.class);
 
         // Unload configs when the JVM closes (gracefully)
         // This will not run if JVM hard crashes, or if it receives a SIGKILL
