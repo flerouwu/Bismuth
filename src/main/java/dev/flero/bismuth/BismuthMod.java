@@ -21,11 +21,12 @@ public class BismuthMod implements ClientModInitializer {
         container = FabricLoader.getInstance().getModContainer("bismuth").get();
 
         logger.info("Loading config...");
-        ConfigManager.loadConfig(GameTitle.class);
-        ConfigManager.loadConfig(TitleCleaner.class);
-        ConfigManager.loadConfig(StartupLogo.class);
-        ConfigManager.loadConfig(AccountSwitcher.class);
-        ConfigManager.loadConfig(ScreenshotManager.class);
+        ConfigManager config = new ConfigManager();
+        config.loadConfig(GameTitle.class);
+        config.loadConfig(TitleCleaner.class);
+        config.loadConfig(StartupLogo.class);
+        config.loadConfig(AccountSwitcher.class);
+        config.loadConfig(ScreenshotManager.class);
 
         logger.info("Registering commands...");
         CommandRegistrar.EVENT.register((manager, _dedicated) -> {
