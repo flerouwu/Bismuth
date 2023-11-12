@@ -1,16 +1,21 @@
 package dev.flero.bismuth.mixin;
 
+import com.mojang.blaze3d.platform.GlStateManager;
 import dev.flero.bismuth.modules.Rendering;
 import dev.flero.bismuth.modules.Zoom;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.GameOptions;
 import net.minecraft.client.render.GameRenderer;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.math.MathHelper;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 @Mixin(GameRenderer.class)
 public abstract class GameRendererMixin {
@@ -61,5 +66,19 @@ public abstract class GameRendererMixin {
     @Redirect(method = "renderHand", at = @At(value = "INVOKE", target = "net/minecraft/client/render/GameRenderer.bobView(F)V"))
     public void renderHand(GameRenderer instance, float tickDelta) {
         if (Rendering.bobbingHandEnabled) this.bobView(tickDelta);
+    }
+
+    @Inject(method = "bobView", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/platform/GlStateManager;translate(FFF)V"), locals = LocalCapture.CAPTURE_FAILHARD, cancellable = true)
+    private void bobView(float tickDelta, CallbackInfo ci, PlayerEntity entity, float g, float h, float i, float j) {
+        if (Rendering.minimalViewBobbing) {
+            h /= 2;
+            i /= 2;
+            j /= 2;
+            GlStateManager.translate(MathHelper.sin(h * (float) Math.PI) * i * 0.5f, -Math.abs(MathHelper.cos(h * (float) Math.PI) * i), 0.0f);
+            GlStateManager.rotate(MathHelper.sin(h * (float) Math.PI) * i * 3.0f, 0.0f, 0.0f, 1.0f);
+            GlStateManager.rotate(Math.abs(MathHelper.cos(h * (float) Math.PI - 0.2f) * i) * 5.0f, 1.0f, 0.0f, 0.0f);
+            GlStateManager.rotate(j, 1.0f, 0.0f, 0.0f);
+            ci.cancel();
+        }
     }
 }

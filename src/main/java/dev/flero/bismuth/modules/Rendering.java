@@ -14,6 +14,9 @@ public class Rendering {
     @ConfigValue(comment = "Enables the hand bobbing effect.")
     public static boolean bobbingHandEnabled = true;
 
+    @ConfigValue
+    public static boolean minimalViewBobbing = false;
+
     public static final float MAX_GAMMA = 14.0f % 28.0f + 1.0f;
 
     // I plan to have some more features in here,
