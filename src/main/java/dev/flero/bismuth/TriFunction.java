@@ -10,6 +10,7 @@ import java.util.function.Function;
 public interface TriFunction<F, S, T, R> {
     R apply(F first, S second, T third);
 
+    @SuppressWarnings("unused")
     @Contract(pure = true)
     @NotNull
     default <V> TriFunction<F, S, T, V> andThen(@NotNull Function<? super R, ? extends V> after) {

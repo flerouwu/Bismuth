@@ -11,6 +11,7 @@ public class AccountSwitcher {
     @ConfigValue
     public static WidgetSide widgetSide = WidgetSide.LEFT;
 
+    @SuppressWarnings("unused")
     public enum WidgetSide {
         LEFT,
         RIGHT

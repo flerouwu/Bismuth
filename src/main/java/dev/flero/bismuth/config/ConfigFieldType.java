@@ -28,6 +28,7 @@ public enum ConfigFieldType {
     ENUM(Enum.class, Enum.class.getTypeName(), (toml, type, key) -> {
         if (!type.isEnum()) throw new RuntimeException("this is literally impossible what");
         String value = toml.getString(key);
+        //noinspection unchecked,rawtypes
         return Enum.valueOf((Class<? extends Enum>) type, value);
     }),
 
