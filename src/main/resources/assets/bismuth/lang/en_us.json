@@ -14,6 +14,13 @@
 
 
 
+  "bismuth.note.keybind": "All of the keybinds that we use. The category will always be 'bismuth.keybind.category'.",
+  "bismuth.keybind.category": "Bismuth",
+  "bismuth.keybind.zoom": "Zoom",
+
+
+
+
   "bismuth.note.command": "Commands for Bismuth.",
   "bismuth.command.main.description": "Main command for Bismuth",
   "bismuth.command.main.usage": "/bismuth <screenshot|version> [args]",
