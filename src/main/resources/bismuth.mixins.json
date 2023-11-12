@@ -6,6 +6,7 @@
   "client": [
     "DirectConnectScreenMixin",
     "GameOptionsMixin",
+    "GameRendererMixin",
     "LivingEntityRendererMixin",
     "MinecraftClientMixin",
     "ScreenshotUtilsMixin",

@@ -28,6 +28,7 @@ public class BismuthMod implements ClientModInitializer {
         config.add(StartupLogo.class);
         config.add(AccountSwitcher.class);
         config.add(ScreenshotManager.class);
+        config.add(Rendering.class);
 
         // Unload configs when the JVM closes (gracefully)
         // This will not run if JVM hard crashes, or if it receives a SIGKILL
