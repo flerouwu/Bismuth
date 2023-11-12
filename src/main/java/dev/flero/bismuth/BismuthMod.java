@@ -20,14 +20,20 @@ public class BismuthMod implements ClientModInitializer {
     public void onInitializeClient() {
         container = FabricLoader.getInstance().getModContainer("bismuth").get();
 
+        // Load configs
         logger.info("Loading config...");
         ConfigManager config = new ConfigManager();
-        config.loadConfig(GameTitle.class);
-        config.loadConfig(TitleCleaner.class);
-        config.loadConfig(StartupLogo.class);
-        config.loadConfig(AccountSwitcher.class);
-        config.loadConfig(ScreenshotManager.class);
+        config.add(GameTitle.class);
+        config.add(TitleCleaner.class);
+        config.add(StartupLogo.class);
+        config.add(AccountSwitcher.class);
+        config.add(ScreenshotManager.class);
 
+        // Unload configs when the JVM closes (gracefully)
+        // This will not run if JVM hard crashes, or if it receives a SIGKILL
+        Runtime.getRuntime().addShutdownHook(new Thread(config::saveAll));
+
+        // Register commands
         logger.info("Registering commands...");
         CommandRegistrar.EVENT.register((manager, _dedicated) -> {
             logger.info("Registering /bismuth command...");
