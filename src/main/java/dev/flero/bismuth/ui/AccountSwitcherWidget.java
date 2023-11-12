@@ -11,10 +11,11 @@ public class AccountSwitcherWidget extends DrawableHelper implements Widget {
     private final VerticalLayout layout = new VerticalLayout(Justify.SpaceAround, new Padding().all(5).between(5), 0x80000000);
 
     public AccountSwitcherWidget() {
-        layout.add(new PaperDollWidget(true), true);
         layout.add(new ButtonWidget(client.getSession().getUsername(), () -> {
             System.out.println("Clicked!");
         }));
+        layout.add(new PaperDollWidget(true), true);
+
     }
 
     @Override

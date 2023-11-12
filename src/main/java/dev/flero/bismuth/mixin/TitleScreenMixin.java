@@ -73,10 +73,22 @@ public class TitleScreenMixin {
         // Draw Player Widget
         if (AccountSwitcher.isEnabled) {
             int height = screen.height / 4 + 48;
-            int width = screen.width / 2 - 64;
-            width -= 36;
-            width -= 64; // Width of the player widget
-            width -= 5; // Padding
+            int width = screen.width / 2;
+
+            if (AccountSwitcher.widgetSide == AccountSwitcher.WidgetSide.LEFT) {
+                width -= 64;
+                width -= 36;
+                width -= 64; // Width of the player widget
+                width -= 5; // Padding
+
+                // Account for language button
+                if (!TitleCleaner.removeLanguage)
+                    width -= 24;
+            } else {
+                width += 36;
+                width += 64; // Width of the player widget
+                width += 5; // Padding
+            }
 
             accountSwitcher.render(mouseX, mouseY, width, height, 64, 105);
         }

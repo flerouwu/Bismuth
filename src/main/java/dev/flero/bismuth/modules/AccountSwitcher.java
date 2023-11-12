@@ -7,4 +7,12 @@ import dev.flero.bismuth.config.ConfigValue;
 public class AccountSwitcher {
     @ConfigValue
     public static boolean isEnabled = true;
+
+    @ConfigValue
+    public static WidgetSide widgetSide = WidgetSide.LEFT;
+
+    public enum WidgetSide {
+        LEFT,
+        RIGHT
+    }
 }
