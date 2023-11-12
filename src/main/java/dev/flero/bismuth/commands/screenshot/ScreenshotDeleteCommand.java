@@ -2,6 +2,7 @@ package dev.flero.bismuth.commands.screenshot;
 
 import dev.flero.bismuth.commands.Command;
 import dev.flero.bismuth.commands.ScreenshotCommand;
+import dev.flero.bismuth.commands.exceptions.FailedDeletingScreenshotException;
 import dev.flero.bismuth.modules.ScreenshotManager;
 import net.legacyfabric.fabric.api.command.v2.StringType;
 import net.legacyfabric.fabric.api.command.v2.lib.sponge.CommandCallable;
@@ -38,11 +39,19 @@ public class ScreenshotDeleteCommand implements Command {
                 awaitingConfirmation.remove(screenshot.getAbsolutePath());
             }).start();
 
-            source.sendMessage(new TranslatableText("bismuth.command.screenshot.delete.message.confirm", fileName, ScreenshotManager.confirmTimeoutSeconds));
+            source.sendMessage(new TranslatableText(
+                    "bismuth.command.screenshot.delete.message.confirm",
+                    fileName,
+                    ScreenshotManager.confirmTimeoutSeconds
+            ));
         } else {
-            screenshot.delete();
-            awaitingConfirmation.remove(screenshot.getAbsolutePath());
+            if (!screenshot.delete()) {
+                throw new FailedDeletingScreenshotException(
+                        new LiteralText("screenshot.delete() returned false for file " + fileName)
+                );
+            }
 
+            awaitingConfirmation.remove(screenshot.getAbsolutePath());
             source.sendMessage(new TranslatableText("bismuth.command.screenshot.delete.message.success", fileName));
         }
 

@@ -4,9 +4,11 @@ import com.moandjiezana.toml.Toml;
 import dev.flero.bismuth.config.exceptions.FieldConversionException;
 import dev.flero.bismuth.config.exceptions.FieldWriteException;
 import dev.flero.bismuth.config.exceptions.InvalidFieldTypeException;
+import dev.flero.bismuth.config.exceptions.UnableToCreateConfigException;
 import net.minecraft.client.MinecraftClient;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,21 +20,8 @@ public class ConfigManager {
     private static final MinecraftClient client = MinecraftClient.getInstance();
     private static final Logger logger = LogManager.getLogger("Bismuth/ConfigManager");
 
-    /**
-     * Load config for a module.
-     * The class must be annotated with {@link ConfigHolder}.
-     *
-     * @param clazz
-     */
-    public void loadConfig(Class<?> clazz) {
-        // Class must be annotated with ConfigHolder
-        ConfigHolder holder = clazz.getAnnotation(ConfigHolder.class);
-        if (holder == null)
-            throw new RuntimeException("Tried to load a config for a class that is not annotated with @ConfigHolder");
-
-        logger.info("Loading config %s", holder.name());
-
-        // Get and validate config file
+    @NotNull
+    private static File getFile(ConfigHolder holder) {
         File file = new File(client.runDirectory, String.format("config/bismuth/%s.toml", holder.name()));
         if (!file.exists()) {
             // if file doesn't exist, create it and write default field values
@@ -41,9 +30,27 @@ public class ConfigManager {
                     throw new IOException("mkdirs() and createNewFile() both returned false");
                 }
             } catch (IOException exception) {
-                throw new RuntimeException("Unable to create config file for module " + holder.name(), exception);
+                throw new UnableToCreateConfigException("Unable to create config file for module " + holder.name(), exception);
             }
         }
+
+        return file;
+    }
+
+    /**
+     * Load config for a module.
+     * The class must be annotated with {@link ConfigHolder}.
+     */
+    public void loadConfig(Class<?> clazz) {
+        // Class must be annotated with ConfigHolder
+        ConfigHolder holder = clazz.getAnnotation(ConfigHolder.class);
+        if (holder == null)
+            throw new RuntimeException("Tried to load a config for a class that is not annotated with @ConfigHolder");
+
+        logger.info("Loading config {}", holder.name());
+
+        // Get and validate config file
+        File file = getFile(holder);
 
         // read file and set values to fields
         // we ignore missing keys, as the fields should have default values
