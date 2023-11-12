@@ -17,6 +17,9 @@ public class Rendering {
     @ConfigValue
     public static boolean minimalViewBobbing = false;
 
+    @ConfigValue
+    public static boolean hideCrosshairInF3 = true;
+
     public static final float MAX_GAMMA = 14.0f % 28.0f + 1.0f;
 
     // I plan to have some more features in here,
