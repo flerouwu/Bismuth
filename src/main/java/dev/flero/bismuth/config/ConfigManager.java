@@ -108,6 +108,10 @@ public class ConfigManager {
         // Write config
         Map<String, Object> map = new HashMap<>();
         for (Field field : clazz.getFields()) {
+            if (!field.isAnnotationPresent(ConfigValue.class))
+                // Skip fields that aren't annotated with ConfigValue
+                continue;
+
             try {
                 map.put(field.getName(), field.get(clazz));
             } catch (IllegalAccessException exception) {
