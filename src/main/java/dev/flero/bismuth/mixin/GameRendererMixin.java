@@ -13,13 +13,16 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(GameRenderer.class)
-public class GameRendererMixin {
+public abstract class GameRendererMixin {
     @Shadow
     private MinecraftClient client;
 
+    @Shadow
+    protected abstract void bobView(float tickDelta);
+
     @Redirect(method = "updateLightmap", at = @At(value = "FIELD", target = "Lnet/minecraft/client/option/GameOptions;gamma:F"))
     public float updateLightmap(GameOptions instance) {
-        if (Rendering.isEnabled && Rendering.fullbrightEnabled) return Rendering.MAX_GAMMA;
+        if (Rendering.fullbrightEnabled) return Rendering.MAX_GAMMA;
         else return instance.gamma;
     }
 
@@ -48,5 +51,15 @@ public class GameRendererMixin {
                 Zoom.currentZoomLevel = 1.0f;
             }
         }
+    }
+
+    @Redirect(method = "setupCamera", at = @At(value = "INVOKE", target = "net/minecraft/client/render/GameRenderer.bobView(F)V"))
+    public void setupCamera(GameRenderer instance, float tickDelta) {
+        if (Rendering.bobbingCameraEnabled) this.bobView(tickDelta);
+    }
+
+    @Redirect(method = "renderHand", at = @At(value = "INVOKE", target = "net/minecraft/client/render/GameRenderer.bobView(F)V"))
+    public void renderHand(GameRenderer instance, float tickDelta) {
+        if (Rendering.bobbingHandEnabled) this.bobView(tickDelta);
     }
 }
