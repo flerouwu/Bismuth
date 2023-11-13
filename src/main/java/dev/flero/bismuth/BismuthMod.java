@@ -47,5 +47,6 @@ public class BismuthMod implements ClientModInitializer {
         // Register keybinds
         logger.info("Registering keybinds...");
         KeyBindingHelper.registerKeyBinding(Zoom.keybinding);
+        KeyBindingHelper.registerKeyBinding(Rendering.renderEntitiesKeybind);
     }
 }
