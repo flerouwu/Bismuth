@@ -6,8 +6,11 @@ import dev.flero.bismuth.modules.Zoom;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.GameOptions;
 import net.minecraft.client.render.GameRenderer;
+import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -59,7 +62,7 @@ public abstract class GameRendererMixin {
     }
 
     @Redirect(method = "setupCamera", at = @At(value = "INVOKE", target = "net/minecraft/client/render/GameRenderer.bobView(F)V"))
-    public void setupCamera(GameRenderer instance, float tickDelta) {
+    public void setupCamera$cameraBobbing(GameRenderer instance, float tickDelta) {
         if (Rendering.bobbingCameraEnabled) this.bobView(tickDelta);
     }
 
@@ -80,5 +83,13 @@ public abstract class GameRendererMixin {
             GlStateManager.rotate(j, 1.0f, 0.0f, 0.0f);
             ci.cancel();
         }
+    }
+
+    @Redirect(method = "transformCamera", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/world/ClientWorld;rayTrace(Lnet/minecraft/util/math/Vec3d;Lnet/minecraft/util/math/Vec3d;)Lnet/minecraft/util/hit/BlockHitResult;"))
+    public BlockHitResult transformCamera$clipThroughPlants(ClientWorld instance, Vec3d from, Vec3d to) {
+        boolean unused = false;
+        boolean ignoreUncollidableBlocks = true;
+        boolean fluidHandling = true;
+        return instance.rayTrace(from, to, unused, ignoreUncollidableBlocks, fluidHandling);
     }
 }
