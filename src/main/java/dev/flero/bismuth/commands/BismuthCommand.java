@@ -1,5 +1,6 @@
 package dev.flero.bismuth.commands;
 
+import dev.flero.bismuth.commands.exceptions.BismuthCommandException;
 import net.legacyfabric.fabric.api.command.v2.lib.sponge.CommandCallable;
 import net.legacyfabric.fabric.api.command.v2.lib.sponge.CommandException;
 import net.legacyfabric.fabric.api.command.v2.lib.sponge.CommandResult;
@@ -11,7 +12,7 @@ import net.minecraft.text.TranslatableText;
 public class BismuthCommand implements Command {
     @Override
     public CommandResult execute(PermissibleCommandSource source, CommandContext context) throws CommandException {
-        throw new CommandException(new TranslatableText("bismuth.command.main.usage"));
+        throw new BismuthCommandException("bismuth.command.main.usage");
     }
 
     @Override

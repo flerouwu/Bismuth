@@ -1,5 +1,6 @@
 package dev.flero.bismuth.commands.screenshot;
 
+import dev.flero.bismuth.chat.Component;
 import dev.flero.bismuth.commands.Command;
 import dev.flero.bismuth.commands.ScreenshotCommand;
 import net.legacyfabric.fabric.api.command.v2.StringType;
@@ -10,8 +11,6 @@ import net.legacyfabric.fabric.api.command.v2.lib.sponge.args.CommandContext;
 import net.legacyfabric.fabric.api.command.v2.lib.sponge.args.GenericArguments;
 import net.legacyfabric.fabric.api.command.v2.lib.sponge.spec.CommandSpec;
 import net.legacyfabric.fabric.api.permission.v1.PermissibleCommandSource;
-import net.minecraft.text.LiteralText;
-import net.minecraft.text.TranslatableText;
 
 import java.awt.*;
 import java.awt.datatransfer.Transferable;
@@ -31,15 +30,15 @@ public class ScreenshotCopyCommand implements Command {
         toolkit.getSystemClipboard().setContents(transferable, null);
 
         // Send the message
-        source.sendMessage(new TranslatableText("bismuth.command.screenshot.copy.message", fileName));
+        source.sendMessage(Component.translated("bismuth.command.screenshot.copy.message", fileName).toText());
         return CommandResult.success();
     }
 
     @Override
     public CommandCallable createCallback() {
         CommandSpec.Builder specification = CommandSpec.builder();
-        specification.description(new TranslatableText("bismuth.command.screenshot.copy.description"));
-        specification.arguments(GenericArguments.string(new LiteralText("file"), StringType.GREEDY_PHRASE));
+        specification.description(Component.translated("bismuth.command.screenshot.copy.description").toText());
+        specification.arguments(GenericArguments.string(Component.text("file").toText(), StringType.GREEDY_PHRASE));
         specification.executor(this::execute);
         return specification.build();
     }

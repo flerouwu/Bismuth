@@ -1,10 +1,9 @@
 package dev.flero.bismuth.commands.exceptions;
 
-import net.legacyfabric.fabric.api.command.v2.lib.sponge.CommandException;
-import net.minecraft.text.Text;
+import dev.flero.bismuth.chat.Component;
 
-public class FailedDeletingScreenshotException extends CommandException {
-    public FailedDeletingScreenshotException(Text message) {
-        super(message);
+public class FailedDeletingScreenshotException extends BismuthCommandException {
+    public FailedDeletingScreenshotException(String text, Object... args) {
+        super(Component.text(text, args));
     }
 }

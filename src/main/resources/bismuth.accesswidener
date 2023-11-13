@@ -2,3 +2,4 @@ accessWidener v2 named
 
 accessible field net/minecraft/client/gui/screen/Screen textRenderer Lnet/minecraft/client/font/TextRenderer;
 accessible field net/minecraft/client/network/PlayerListEntry model Ljava/lang/String;
+accessible method net/minecraft/util/Language getInstance ()Lnet/minecraft/util/Language;

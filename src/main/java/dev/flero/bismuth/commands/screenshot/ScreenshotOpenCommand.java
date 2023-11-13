@@ -1,7 +1,9 @@
 package dev.flero.bismuth.commands.screenshot;
 
+import dev.flero.bismuth.chat.Component;
 import dev.flero.bismuth.commands.Command;
 import dev.flero.bismuth.commands.ScreenshotCommand;
+import dev.flero.bismuth.commands.exceptions.BismuthCommandException;
 import net.legacyfabric.fabric.api.command.v2.StringType;
 import net.legacyfabric.fabric.api.command.v2.lib.sponge.CommandCallable;
 import net.legacyfabric.fabric.api.command.v2.lib.sponge.CommandException;
@@ -10,8 +12,6 @@ import net.legacyfabric.fabric.api.command.v2.lib.sponge.args.CommandContext;
 import net.legacyfabric.fabric.api.command.v2.lib.sponge.args.GenericArguments;
 import net.legacyfabric.fabric.api.command.v2.lib.sponge.spec.CommandSpec;
 import net.legacyfabric.fabric.api.permission.v1.PermissibleCommandSource;
-import net.minecraft.text.LiteralText;
-import net.minecraft.text.TranslatableText;
 
 import java.awt.*;
 import java.io.File;
@@ -26,9 +26,9 @@ public class ScreenshotOpenCommand implements Command {
 
         try {
             Desktop.getDesktop().open(screenshot);
-            source.sendMessage(new TranslatableText("bismuth.command.screenshot.open.message", fileName));
+            source.sendMessage(Component.translated("bismuth.command.screenshot.open.message", fileName).toText());
         } catch (IOException exception) {
-            throw new CommandException(new TranslatableText("bismuth.command.screenshot.error.open", fileName));
+            throw new BismuthCommandException("bismuth.command.screenshot.error.open", fileName);
         }
         return CommandResult.success();
     }
@@ -36,8 +36,8 @@ public class ScreenshotOpenCommand implements Command {
     @Override
     public CommandCallable createCallback() {
         CommandSpec.Builder specification = CommandSpec.builder();
-        specification.description(new TranslatableText("bismuth.command.screenshot.open.description"));
-        specification.arguments(GenericArguments.string(new LiteralText("file"), StringType.GREEDY_PHRASE));
+        specification.description(Component.translated("bismuth.command.screenshot.open.description").toText());
+        specification.arguments(GenericArguments.string(Component.text("file").toText(), StringType.GREEDY_PHRASE));
         specification.executor(this::execute);
         return specification.build();
     }
