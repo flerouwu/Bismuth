@@ -39,9 +39,11 @@ Steps to reproduce the behavior:
 
 ### Crash log (if applicable)
 <!-- This can be found in `.minecraft/crash-reports/crash-xxx-client.txt` -->
+<!-- You can upload it as a file, upload it to a site like https://mclo.gs, or directly inline in this document (please wrap it in ```) -->
 
 ### Game log
 <!-- This is at `.minecraft/logs/latest.log`, or `.minecraft/logs/xxx.log.gz`. -->
+<!-- You can upload it as a file, upload it to a site like https://mclo.gs, or directly inline in this document (please wrap it in ```) -->
 
 ### Additional Information
 <!-- If you aren't using the default settings for the associated module, please specify the settings here. -->
