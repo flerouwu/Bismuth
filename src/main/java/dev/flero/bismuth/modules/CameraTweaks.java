@@ -3,7 +3,7 @@ package dev.flero.bismuth.modules;
 import dev.flero.bismuth.config.ConfigHolder;
 import dev.flero.bismuth.config.ConfigValue;
 
-@ConfigHolder(name = "camera_tweaks")
+@ConfigHolder(name = "modules/camera_tweaks")
 public class CameraTweaks {
     @ConfigValue
     public static boolean isEnabled = false;
