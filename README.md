@@ -50,16 +50,17 @@ Work in progress Minecraft client for 1.8.9. Built for the [Legacy Fabric][legac
 
 ## Planned Features
 
-- Raw mouse input - attempts to reduce the time it takes to retrieve mouse movement.
+- No hurt cam.
+- Prevent rendering of certain particles and particle multipliers.
 - Customizable chat box - resizable, movable, custom chat tabs, etc.
+- Raw mouse input - attempts to reduce the time it takes to retrieve mouse movement.
 - AutoGG, AutoTip (Hypixel), etc.
-- Crypto miner (jk).
-- Removable fog.
 - Cloud height and removal.
+- Removable fog.
 - User interface to change settings.
-- Better keybind system (including fixing perspective key when bound to a mouse button).
 - Preventing chunks from unloading if the old render distance is less than the new distance.
 - Showing capes (and maybe more) from other clients (you still need to buy them from the original client).
+- Better keybind system (including fixing perspective key when bound to a mouse button).
 
 ## Known Issues
 
