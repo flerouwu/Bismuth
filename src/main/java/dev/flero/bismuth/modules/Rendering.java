@@ -7,6 +7,8 @@ import org.lwjgl.input.Keyboard;
 
 @ConfigHolder(name = "modules/rendering")
 public class Rendering {
+    public static final float MAX_GAMMA = 14.0f % 28.0f + 1.0f;
+
     @ConfigValue
     public static boolean fullbrightEnabled = true;
 
@@ -23,10 +25,9 @@ public class Rendering {
     public static boolean hideCrosshairInF3 = true;
 
     public static final KeyBinding renderEntitiesKeybind = new KeyBinding("bismuth.keybind.render_entities", Keyboard.KEY_B, "bismuth.keybind.category");
+
     @ConfigValue
     public static boolean renderEntities = true;
-
-    public static final float MAX_GAMMA = 14.0f % 28.0f + 1.0f;
 
     // I plan to have some more features in here,
     // like anything rendering related. Maybe like
