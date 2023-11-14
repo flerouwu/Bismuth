@@ -54,4 +54,6 @@ Steps to reproduce the behavior:
 
 
 <!-- Thank you for filling this out! Once you are certain that you have completed this template completely, tick the box below. -->
-- [ ] I have completed this template to the best of my ability, providing all information needed to repoduce and fix this issue.
+
+- [ ] I have completed this template to the best of my ability, providing all information needed to reproduce and fix
+  this issue.
