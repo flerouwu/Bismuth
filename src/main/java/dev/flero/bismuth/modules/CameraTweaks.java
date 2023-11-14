@@ -16,4 +16,7 @@ public class CameraTweaks {
 
     @ConfigValue
     public static boolean disableHandBobbing = false;
+
+    @ConfigValue
+    public static boolean disableHurtCam = false;
 }

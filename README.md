@@ -22,9 +22,10 @@ Work in progress Minecraft client for 1.8.9. Built for the [Legacy Fabric][legac
 
 - Account Switcher (WIP - waiting for API access).
 - Modifying the game title.
-- View bobbing modifications.
+- Camera tweak options.
   - Disable view bobbing for the camera/hand separately.
   - Minimal view bobbing reduces the amount of bobbing.
+  - Disable hurt cam.
 - Hide the crosshair in third person.
 - Fullbright toggle.
 - Keybind to stop rendering entities.
@@ -50,7 +51,6 @@ Work in progress Minecraft client for 1.8.9. Built for the [Legacy Fabric][legac
 
 ## Planned Features
 
-- No hurt cam.
 - Prevent rendering of certain particles and particle multipliers.
 - Customizable chat box - resizable, movable, custom chat tabs, etc.
 - Raw mouse input - attempts to reduce the time it takes to retrieve mouse movement.

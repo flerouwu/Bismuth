@@ -93,4 +93,9 @@ public abstract class GameRendererMixin {
         boolean fluidHandling = true;
         return instance.rayTrace(from, to, unused, ignoreUncollidableBlocks, fluidHandling);
     }
+
+    @Inject(method = "bobViewWhenHurt", at = @At(value = "HEAD"), cancellable = true)
+    private void bobViewWhenHurt(float tickDelta, CallbackInfo ci) {
+        if (CameraTweaks.isEnabled && CameraTweaks.disableHurtCam) ci.cancel();
+    }
 }
