@@ -1,6 +1,7 @@
 package dev.flero.bismuth.mixin;
 
 import com.mojang.blaze3d.platform.GlStateManager;
+import dev.flero.bismuth.modules.CameraTweaks;
 import dev.flero.bismuth.modules.Rendering;
 import dev.flero.bismuth.modules.Zoom;
 import net.minecraft.client.MinecraftClient;
@@ -63,17 +64,17 @@ public abstract class GameRendererMixin {
 
     @Redirect(method = "setupCamera", at = @At(value = "INVOKE", target = "net/minecraft/client/render/GameRenderer.bobView(F)V"))
     public void setupCamera$cameraBobbing(GameRenderer instance, float tickDelta) {
-        if (Rendering.bobbingCameraEnabled) this.bobView(tickDelta);
+        if (CameraTweaks.isEnabled && !CameraTweaks.disableCameraBobbing) this.bobView(tickDelta);
     }
 
     @Redirect(method = "renderHand", at = @At(value = "INVOKE", target = "net/minecraft/client/render/GameRenderer.bobView(F)V"))
     public void renderHand(GameRenderer instance, float tickDelta) {
-        if (Rendering.bobbingHandEnabled) this.bobView(tickDelta);
+        if (CameraTweaks.isEnabled && !CameraTweaks.disableHandBobbing) this.bobView(tickDelta);
     }
 
     @Inject(method = "bobView", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/platform/GlStateManager;translate(FFF)V"), locals = LocalCapture.CAPTURE_FAILHARD, cancellable = true)
     private void bobView(float tickDelta, CallbackInfo ci, PlayerEntity entity, float g, float h, float i, float j) {
-        if (Rendering.minimalViewBobbing) {
+        if (CameraTweaks.isEnabled && CameraTweaks.minimalViewBobbing) {
             h /= 2;
             i /= 2;
             j /= 2;
