@@ -33,8 +33,11 @@ Steps to reproduce the behavior:
 ### Versions
 
 **Bismuth version (`/bismuth version`):** 
+
 **Java version (`java --version`):** 
+
 **Launcher (e.g. Prism, MultiMC, Vanilla, etc.):** 
+
 **Other mods (e.g. `Optifine HD U M5`):** 
 
 ### Crash log (if applicable)
