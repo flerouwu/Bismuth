@@ -11,7 +11,7 @@ following information as best as you can. This helps us efficiently fix this iss
 
 ### Checks
 - [ ] I have verified that there are no other opened issues regarding this bug. <!-- If there are, please add a comment to that issue. -->
-- [ ] I am confident that this is a bug report. <!-- For mod incompatibilties, please use the other template. -->
+- [ ] I am confident that this is a bug report. <!-- For mod incompatibilities, please use the other template. -->
 
 ### Describe the bug
 <!-- A clear and concise description of what the bug is. -->
