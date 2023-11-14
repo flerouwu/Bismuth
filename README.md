@@ -74,7 +74,7 @@ Please also make sure that you have the latest version of Bismuth installed. Als
 with default configurations.
 
 When opening an issue, please make sure to include as much information as possible.
-This includes your crash report, Bismuth version, Minecraft version, which launcher you are using, and any other mods
+This includes your crash report, Bismuth version, which launcher you are using, and any other mods
 that you have installed.
 
 In your reproduction steps, you should provide a step-by-step guide on how to reproduce the issue.
