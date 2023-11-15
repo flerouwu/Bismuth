@@ -48,6 +48,7 @@ Work in progress Minecraft client for 1.8.9. Built for the [Legacy Fabric][legac
   - Modifies the FOV (temporarily) to make the camera appear to be closer.
 - Multiplayer direct connect status pinger.
   - Shows the status of the server IP entered in the Direct Connect multiplayer menu.
+- Customizable Discord presence (currently through language files, very limited).
 
 ## Planned Features
 

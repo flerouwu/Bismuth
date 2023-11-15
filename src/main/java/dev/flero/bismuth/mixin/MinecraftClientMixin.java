@@ -1,12 +1,15 @@
 package dev.flero.bismuth.mixin;
 
 import dev.flero.bismuth.chat.Component;
+import dev.flero.bismuth.modules.DiscordRPC;
 import dev.flero.bismuth.modules.GameTitle;
 import dev.flero.bismuth.modules.Rendering;
 import dev.flero.bismuth.modules.StartupLogo;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.player.ClientPlayerEntity;
 import net.minecraft.resource.DefaultResourcePack;
+import net.minecraft.server.integrated.IntegratedServer;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import org.lwjgl.opengl.Display;
@@ -16,6 +19,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,6 +28,12 @@ import java.io.InputStream;
 public class MinecraftClientMixin {
     @Shadow
     public ClientPlayerEntity player;
+
+    @Shadow
+    private IntegratedServer server;
+
+    @Shadow
+    private String serverAddress;
 
     @Redirect(method = "setPixelFormat", at = @At(value = "INVOKE", target = "org/lwjgl/opengl/Display.setTitle(Ljava/lang/String;)V"))
     public void setTitle(String title) {
@@ -47,6 +57,16 @@ public class MinecraftClientMixin {
             if (Rendering.renderEntities)
                 player.sendMessage(Component.text("Now rendering entities.").style(Formatting.GREEN).toText());
             else player.sendMessage(Component.text("No longer rendering entities.").style(Formatting.RED).toText());
+        }
+    }
+
+    @Inject(method = "connect(Lnet/minecraft/client/world/ClientWorld;Ljava/lang/String;)V", at = @At(value = "TAIL"), locals = LocalCapture.CAPTURE_FAILHARD)
+    public void connect(ClientWorld world, String loadingMessage, CallbackInfo ci) {
+        if (server == null) {
+            DiscordRPC.setInfo(
+                    Component.translated("bismuth.rpc.game_multiplayer.details"),
+                    Component.translated("bismuth.rpc.game_multiplayer.state", serverAddress)
+            );
         }
     }
 }

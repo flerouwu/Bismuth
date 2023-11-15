@@ -1,4 +1,4 @@
-package dev.flero.bismuth.mixin;
+package dev.flero.bismuth.mixin.screens;
 
 import dev.flero.bismuth.modules.ScrollableTooltips;
 import net.minecraft.client.MinecraftClient;

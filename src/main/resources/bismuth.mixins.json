@@ -4,18 +4,21 @@
   "package": "dev.flero.bismuth.mixin",
   "compatibilityLevel": "JAVA_8",
   "client": [
-    "DirectConnectScreenMixin",
     "GameOptionsMixin",
-    "GameRendererMixin",
-    "HandledScreenMixin",
     "InGameHudMixin",
-    "LivingEntityRendererMixin",
     "MinecraftClientMixin",
     "PlayerInventoryMixin",
     "ScreenshotUtilsMixin",
     "SnooperMixin",
-    "TitleScreenMixin",
-    "WorldRendererMixin"
+    "render.GameRendererMixin",
+    "render.LivingEntityRendererMixin",
+    "render.WorldRendererMixin",
+    "screens.CreateWorldScreenMixin",
+    "screens.DirectConnectScreenMixin",
+    "screens.HandledScreenMixin",
+    "screens.MultiplayerScreenMixin",
+    "screens.SelectWorldScreenMixin",
+    "screens.TitleScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1

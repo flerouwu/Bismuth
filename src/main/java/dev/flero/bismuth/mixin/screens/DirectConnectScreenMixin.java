@@ -1,5 +1,7 @@
-package dev.flero.bismuth.mixin;
+package dev.flero.bismuth.mixin.screens;
 
+import dev.flero.bismuth.chat.Component;
+import dev.flero.bismuth.modules.DiscordRPC;
 import net.minecraft.client.gui.screen.DirectConnectScreen;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.multiplayer.MultiplayerScreen;
@@ -27,6 +29,14 @@ public class DirectConnectScreenMixin {
 
     @Unique
     private BismuthServerEntry statusEntry = null;
+
+    @Inject(method = "init", at = @At("HEAD"))
+    public void init(CallbackInfo ci) {
+        DiscordRPC.setInfo(
+                Component.translated("bismuth.rpc.title_direct_connect.details"),
+                Component.translated("bismuth.rpc.title_direct_connect.state")
+        );
+    }
 
     @Inject(method = "render", at = @At(value = "INVOKE", target = "net/minecraft/client/gui/screen/Screen.render(IIF)V"))
     public void render(int mouseX, int mouseY, float tickDelta, CallbackInfo ci) {

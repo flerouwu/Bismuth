@@ -1,7 +1,9 @@
-package dev.flero.bismuth.mixin;
+package dev.flero.bismuth.mixin.screens;
 
 import dev.flero.bismuth.BismuthMod;
+import dev.flero.bismuth.chat.Component;
 import dev.flero.bismuth.modules.AccountSwitcher;
+import dev.flero.bismuth.modules.DiscordRPC;
 import dev.flero.bismuth.modules.TitleCleaner;
 import dev.flero.bismuth.ui.AccountSwitcherWidget;
 import net.fabricmc.loader.api.metadata.ModMetadata;
@@ -23,6 +25,14 @@ public class TitleScreenMixin {
     @Unique
     private static final AccountSwitcherWidget accountSwitcher = new AccountSwitcherWidget();
 
+    @Inject(method = "init", at = @At(value = "HEAD"))
+    private void init(CallbackInfo ci) {
+        DiscordRPC.setInfo(
+                Component.translated("bismuth.rpc.title.details"),
+                Component.translated("bismuth.rpc.title.state")
+        );
+    }
+
     @SuppressWarnings("SameReturnValue")
     @Redirect(method = "initWidgetsNormal", at = @At(value = "INVOKE", target = "java/util/List.add(Ljava/lang/Object;)Z"))
     private boolean initWidgetsNormal(List<ButtonWidget> list, Object obj) {
@@ -36,7 +46,7 @@ public class TitleScreenMixin {
     }
 
     @Redirect(method = "init", at = @At(value = "INVOKE", target = "java/util/List.add(Ljava/lang/Object;)Z"))
-    public boolean init(List<ButtonWidget> list, Object obj) {
+    public boolean buttonWidget$init(List<ButtonWidget> list, Object obj) {
         ButtonWidget button = (ButtonWidget) obj;
         if (TitleCleaner.isEnabled) {
             if (button.id == 5 && TitleCleaner.removeLanguage) return false;

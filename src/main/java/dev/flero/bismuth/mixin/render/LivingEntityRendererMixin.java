@@ -1,4 +1,4 @@
-package dev.flero.bismuth.mixin;
+package dev.flero.bismuth.mixin.render;
 
 import net.minecraft.client.entity.player.BismuthOtherClientPlayerEntity;
 import net.minecraft.client.render.entity.LivingEntityRenderer;

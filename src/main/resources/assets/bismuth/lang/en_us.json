@@ -22,6 +22,25 @@
 
 
 
+  "bismuth.note.rpc": "All of the messages that we use for Discord RPC.",
+  "bismuth.rpc.title.details": "Playing Minecraft",
+  "bismuth.rpc.title.state": "In the main menu",
+
+  "bismuth.rpc.title_singleplayer.details": "Playing Singleplayer",
+  "bismuth.rpc.title_singleplayer.state": "Selecting a world",
+
+  "bismuth.rpc.create_world.details": "Playing Singleplayer",
+  "bismuth.rpc.create_world.state": "Creating a new world",
+
+  "bismuth.rpc.title_multiplayer.details": "Playing Multiplayer",
+  "bismuth.rpc.title_multiplayer.state": "Choosing a server",
+
+  "bismuth.rpc.title_direct_connect.details": "Playing Multiplayer",
+  "bismuth.rpc.title_direct_connect.state": "Using direct connect",
+
+
+
+
   "bismuth.note.command": "Commands for Bismuth.",
   "bismuth.command.main.description": "Main command for Bismuth",
   "bismuth.command.main.usage": "/bismuth <screenshot|version> [args]",

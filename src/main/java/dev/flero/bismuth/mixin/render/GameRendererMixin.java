@@ -1,4 +1,4 @@
-package dev.flero.bismuth.mixin;
+package dev.flero.bismuth.mixin.render;
 
 import com.mojang.blaze3d.platform.GlStateManager;
 import dev.flero.bismuth.modules.CameraTweaks;

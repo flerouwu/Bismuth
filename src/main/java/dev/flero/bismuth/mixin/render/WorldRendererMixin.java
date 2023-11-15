@@ -1,4 +1,4 @@
-package dev.flero.bismuth.mixin;
+package dev.flero.bismuth.mixin.render;
 
 import dev.flero.bismuth.modules.Rendering;
 import net.minecraft.client.render.CameraView;
