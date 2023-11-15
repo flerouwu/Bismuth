@@ -1,6 +1,5 @@
 package dev.flero.bismuth.ui;
 
-import com.mojang.authlib.GameProfile;
 import com.mojang.blaze3d.platform.GLX;
 import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.MinecraftClient;
@@ -9,37 +8,26 @@ import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.render.DiffuseLighting;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.entity.LivingEntity;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import java.util.UUID;
 
 public class PaperDollWidget extends DrawableHelper implements Widget {
-    private static final Logger logger = LogManager.getLogger("Bismuth/PaperDollWidget");
     private static final MinecraftClient client = MinecraftClient.getInstance();
-    private GameProfile profile;
     private BismuthOtherClientPlayerEntity dummy;
     private final boolean followMouse;
 
     public PaperDollWidget(boolean followMouse) {
         this.followMouse = followMouse;
-
-        profile = client.getSession().getProfile();
-        if (profile == null) {
-            logger.info("No profile found, creating dummy profile and requesting secure profile information.");
-            profile = new GameProfile(UUID.fromString(client.getSession().getUuid()), client.getSession().getUsername());
-            MinecraftClient.getInstance().getSessionService().fillProfileProperties(profile, true);
-        }
     }
 
     public LivingEntity getDummy() {
         if (client.player != null) return client.player;
-        if (dummy == null) dummy = new BismuthOtherClientPlayerEntity(profile);
+        if (dummy == null) dummy = new BismuthOtherClientPlayerEntity(client.getSession().getProfile());
         return dummy;
     }
 
     @Override
     public void render(int mouseX, int mouseY, int x, int y, int width, int height) {
+        if (client.getSession().getProfile() == null) return;
+
         GlStateManager.popMatrix();
         GlStateManager.pushMatrix();
 
