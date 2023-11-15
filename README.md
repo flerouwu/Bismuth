@@ -52,6 +52,10 @@ Work in progress Minecraft client for 1.8.9. Built for the [Legacy Fabric][legac
 
 ## Planned Features
 
+- Better language system than Fabric provides.
+  - Language files will be stored in TOML, and are loaded at mod runtime.
+  - These files can be edited in-game the same as module settings will be able to.
+  - The selected language will synchronize with Minecraft's language setting.
 - Prevent rendering of certain particles and particle multipliers.
 - Customizable chat box - resizable, movable, custom chat tabs, etc.
 - Raw mouse input - attempts to reduce the time it takes to retrieve mouse movement.
