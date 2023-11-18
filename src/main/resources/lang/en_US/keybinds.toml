@@ -1,0 +1,5 @@
+category = "Bismuth"
+
+[keybinds]
+zoom = "Zoom"
+renderEntities = "Toggle Rendering of Entities"

@@ -1,0 +1,9 @@
+message = """
+§7Saved screenshot {name}
+{copy} {open} {delete}
+"""
+
+[actions]
+copy = "§9[Copy]"
+open = "§a[Open]"
+delete = "§c[Delete]"

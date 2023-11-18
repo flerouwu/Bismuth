@@ -1,5 +1,6 @@
 package dev.flero.bismuth.mixin;
 
+import dev.flero.bismuth.BismuthMod;
 import dev.flero.bismuth.chat.Component;
 import dev.flero.bismuth.modules.DiscordRPC;
 import dev.flero.bismuth.modules.GameTitle;
@@ -25,7 +26,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 @Mixin(MinecraftClient.class)
-public class MinecraftClientMixin {
+public abstract class MinecraftClientMixin {
     @Shadow
     public ClientPlayerEntity player;
 
@@ -34,6 +35,16 @@ public class MinecraftClientMixin {
 
     @Shadow
     private String serverAddress;
+
+    @Shadow
+    protected abstract void setGlErrorMessage(String message);
+
+    @Inject(method = "initializeGame", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/InGameHud;<init>(Lnet/minecraft/client/MinecraftClient;)V"))
+    public void initializeGame(CallbackInfo ci) {
+        setGlErrorMessage("Loading Bismuth");
+        BismuthMod.instance.initializeGame();
+        setGlErrorMessage("Post startup");
+    }
 
     @Redirect(method = "setPixelFormat", at = @At(value = "INVOKE", target = "org/lwjgl/opengl/Display.setTitle(Ljava/lang/String;)V"))
     public void setTitle(String title) {

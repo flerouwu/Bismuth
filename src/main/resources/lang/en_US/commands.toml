@@ -1,0 +1,52 @@
+[main] # /bismuth
+name = "bismuth"
+aliases = []
+description = "Main command for Bismuth."
+
+[version] # /bismuth version
+name = "version"
+aliases = ["v"]
+description = "Shows the current version of Bismuth."
+
+[version.message]
+version = "You are running Bismuth version {version}."
+contributors = "Contributors: {contributors}"
+
+[screenshots] # /bismuth screenshots
+name = "screenshots"
+aliases = ["ss"]
+description = "Main command for screenshots."
+
+[screenshots.list] # /bismuth screenshots list
+name = "list"
+aliases = ["l"]
+description = "Lists all screenshots."
+
+[screenshots.list.message]
+header = "§6[PAGE {pages.current}/{pages.max}] §e{count} Screenshots §7(sorted by last created):"
+entry = "§7- §e{index}. §7{filename} §8({size} KB)"
+
+[screenshots.open] # /bismuth screenshots open
+name = "open"
+aliases = ["o"]
+description = "Opens a screenshot."
+
+[screenshots.open.message]
+open = "Opening screenshot §e{filename}§7..."
+
+[screenshots.copy] # /bismuth screenshots copy
+name = "copy"
+aliases = ["c"]
+description = "Copies a screenshot to the clipboard."
+
+[screenshots.copy.message]
+copy = "Copied screenshot §e{filename}§7 to clipboard."
+
+[screenshots.delete] # /bismuth screenshots delete
+name = "delete"
+aliases = ["d", "rm"]
+description = "Deletes a screenshot."
+
+[screenshots.delete.message]
+confirm = "§eAre you sure you want to delete screenshot §7{filename}§e? Run the command again to confirm."
+delete = "Deleted screenshot §e{filename}§7."

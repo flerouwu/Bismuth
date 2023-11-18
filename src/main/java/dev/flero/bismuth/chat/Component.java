@@ -4,7 +4,9 @@ import net.minecraft.text.LiteralText;
 import net.minecraft.util.Formatting;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public abstract class Component {
     public final List<Formatting> styles = new ArrayList<>();
@@ -19,16 +21,18 @@ public abstract class Component {
      * @return The injected string.
      */
     public static String injectArguments(String text, Object[] args) {
-        for (Object arg : args) {
-            String replacement;
-            if (arg instanceof Component) {
-                Component component = (Component) arg;
-                replacement = component.getUnformatted();
-            } else {
-                replacement = arg.toString();
-            }
+        if (args != null && Arrays.stream(args).anyMatch(Objects::nonNull)) {
+            for (Object arg : args) {
+                String replacement;
+                if (arg instanceof Component) {
+                    Component component = (Component) arg;
+                    replacement = component.getUnformatted();
+                } else {
+                    replacement = arg.toString();
+                }
 
-            text = text.replaceFirst("%s", replacement);
+                text = text.replaceFirst("%s", replacement);
+            }
         }
 
         return text;

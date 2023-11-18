@@ -26,7 +26,7 @@ public class ScreenshotListCommand implements Command {
 
     @Override
     public CommandResult execute(PermissibleCommandSource source, CommandContext context) throws CommandException {
-        File screenshots = new File(client.runDirectory, "screenshots");
+        File screenshots = new File(client.runDirectory, "screenshots.toml");
         if (!screenshots.exists())
             throw new BismuthCommandException("bismuth.command.screenshot.error.noScreenshots");
 
@@ -34,7 +34,7 @@ public class ScreenshotListCommand implements Command {
         if (page < 1)
             throw new BismuthCommandException("bismuth.command.screenshot.error.invalidPage", page);
 
-        // Get all files in the screenshots directory
+        // Get all files in the screenshots.toml directory
         List<File> files = new ArrayList<>();
         for (File file : Arrays.stream(Objects.requireNonNull(screenshots.listFiles()))
                 .skip((long) (page - 1) * SCREENSHOTS_PER_PAGE)
@@ -46,11 +46,11 @@ public class ScreenshotListCommand implements Command {
         // Sort by last modified
         files = files.stream().sorted((a, b) -> Long.compare(b.lastModified(), a.lastModified())).collect(Collectors.toList());
 
-        // Throw an error if there are no screenshots
+        // Throw an error if there are no screenshots.toml
         if (files.isEmpty())
             throw new BismuthCommandException("bismuth.command.screenshot.error.noScreenshots");
 
-        // Display the list of screenshots
+        // Display the list of screenshots.toml
         int totalPages = (int) Math.ceil((double) Objects.requireNonNull(screenshots.listFiles()).length / SCREENSHOTS_PER_PAGE);
         TranslatableComponent component = Component.translated("bismuth.command.screenshot.list.message.header", page, totalPages, files.size());
         for (File file : files) {

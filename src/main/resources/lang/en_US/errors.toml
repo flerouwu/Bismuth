@@ -1,0 +1,11 @@
+[general]
+prefix = "§c[Error] §7"
+unknown = "An unknown error occurred trying to perform that command."
+nullModContainer = "Mod container is null. Has Bismuth been initialized?"
+
+[screenshot]
+prefix = "§c[Screenshot Error] §7"
+unableToSave = "Unable to save screenshot. Check the game log for more details."
+notFound = "Screenshot {name} not found."
+noScreenshots = "No screenshots were found in the screenshots directory."
+unableToOpen = "Unable to open screenshot. Check the game log for more detials."

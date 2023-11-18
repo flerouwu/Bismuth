@@ -19,7 +19,7 @@ public class ScreenshotCommand implements Command {
     private static final MinecraftClient client = MinecraftClient.getInstance();
 
     public static File getScreenshot(String fileName) throws CommandException {
-        fileName = "screenshots" + File.separator + fileName;
+        fileName = "screenshots.toml" + File.separator + fileName;
         File screenshot = new File(client.runDirectory, fileName);
         if (!screenshot.exists())
             throw new CommandException(new TranslatableText("bismuth.command.screenshot.error.notFound", fileName));

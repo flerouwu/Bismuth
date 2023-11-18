@@ -1,0 +1,19 @@
+[screens.title]
+details = "Playing Minecraft"
+state = "In the main menu"
+
+[screens.selectWorld]
+details = "Playing Singleplayer"
+state = "Selecting world"
+
+[screens.createWorld]
+details = "Playing Singleplayer"
+state = "Creating a new world"
+
+[screens.multiplayer]
+details = "Playing Multiplayer"
+state = "In the multiplayer menu"
+
+[screens.directConnect]
+details = "Playing Multiplayer"
+state = "Using direct connect"

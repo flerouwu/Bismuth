@@ -27,11 +27,11 @@ public class ScreenshotDeleteCommand implements Command {
         String fileName = context.getAll("file").stream().map(value -> (String) value).collect(Collectors.joining(" "));
         File screenshot = ScreenshotCommand.getScreenshot(fileName);
 
-        if (ScreenshotManager.deleteConfirmation && !awaitingConfirmation.contains(screenshot.getAbsolutePath())) {
+        if (ScreenshotManager.Config.INSTANCE.getDeleteConfirmation() && !awaitingConfirmation.contains(screenshot.getAbsolutePath())) {
             awaitingConfirmation.add(screenshot.getAbsolutePath());
             new Thread(() -> {
                 try {
-                    Thread.sleep(ScreenshotManager.confirmTimeoutSeconds);
+                    Thread.sleep(ScreenshotManager.Config.INSTANCE.getConfirmTimeoutSeconds());
                 } catch (InterruptedException ignored) {
                 }
 
@@ -41,7 +41,7 @@ public class ScreenshotDeleteCommand implements Command {
             source.sendMessage(Component.translated(
                     "bismuth.command.screenshot.delete.message.confirm",
                     fileName,
-                    ScreenshotManager.confirmTimeoutSeconds
+                    ScreenshotManager.Config.INSTANCE.getConfirmTimeoutSeconds()
             ).toText());
         } else {
             if (!screenshot.delete()) {
