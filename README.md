@@ -66,6 +66,7 @@ Work in progress Minecraft client for 1.8.9. Built for the [Legacy Fabric][legac
 - Preventing chunks from unloading if the old render distance is less than the new distance.
 - Showing capes (and maybe more) from other clients (you still need to buy them from the original client).
 - Better keybind system (including fixing perspective key when bound to a mouse button).
+- Ability to turn off / customize volume of certain sounds.
 
 ## Known Issues
 
